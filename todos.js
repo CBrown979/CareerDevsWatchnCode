@@ -1,19 +1,4 @@
-//Version 5 - Loops of Logic
-
-//Initialization - creating a variable to keep track of how many times you want to do something
-//Condition - if this is true, keep going - otherwise STOP
-//Final Expression - this happens after each round
-//Structure - for(initialization; condition; final-expression) {
-//  do some action -- such as console.log("hey");
-//}
-
-// var testArray=["item 1", "item 2", "item 3"];
-
-// for (var i=0; i<testArray.length; i++) {  
-//     //console.log("Hey");
-//     //console.log(i);
-//     console.log(testArray[i]);
-// } Note: i++ is the same as i=i+1
+//Version 6 - Thinking in Code
 
 var todoList = {
   todos: [],
@@ -29,35 +14,6 @@ var todoList = {
             console.log("( )".todos[i].todoText);
       }
     }
-    //To show .todoText: example: the array is this.todos, and this.todos.length has 3 items
-    //i=0
-    //i=1
-    //i=2
-    //this.todos[i] is equal to each item in the array
-    //this.todos[i].todoText is equal to the todoText property on each in the array
-  //}
-    //pseudo code for telling if .todos is empty
-      //if this.todos.length === 0 --> === is the strictest, most consistent value comparison in JS
-        //console.log("Your todoList is empty!");
-      //else
-        //print todos as normal --> (with displayTodos forLoop) 
-    
-    //   if (this.todos.length === 0) {
-    //   console.log("Your todolist is empty!");
-    // }   else {
-    //     console.log("My Todos:");
-    //     for (var i=0; i<this.todos.length; i++) {
-    //       if this.todos[i].completed === true {
-    //         console.log("(x)".todos[i].todoText);
-    //   }     else {
-    //           console.log("( )".todos[i].todoText);
-    //   }
-      
-      //psuedo code for show .completed
-      // check if .completed is true
-        // print with (x)
-        // else
-          //print with ( )
     }
   },
   addTodo: function(todoText) {//this todoText is the name of the property on this object
@@ -80,5 +36,32 @@ var todoList = {
       var todo = this.todos[position];//grabbing and saving the specific todo we're interested in
       todo.completed = !todo.completed;//grabbing todo.completed (which is a boolean true/false value), and we want to change the value of it to the opposite of what it is - 1)get todo.completed, put on right side and add the bang operator (!) before it to flip it to opposite of what it currently is     
       this.displayTodos();
+  },
+  toggleAll: function() { // we're recording the total number of todos and completed todos to see if they are equal
+    var totalTodos = this.todos.length;
+    var completedTodos=0;
+    
+    //Get number of completed todos.
+    for(var i=0; i<totalTodos; i++) { // using forLoop to count the number of completed todos
+      if (this.todos[i].completed === true) { //the if looks at each item in our array
+        completedTodos++; 
+      }
+    }
+    
+    
+    // Case 1: If everything is true, make everything false.
+    if (completedTodos === totalTodos) { // we are checking to make sure that everything is true
+      // Make everything false.
+      for(var i=0; i<totalTodos; i++) { // we're going thru all the items and changing all completed items to false
+        this.todos[i].completed=false;
+      }
+    // Case 2: Otherwise, make everything true.  
+    } else {
+      for( var i=0; i<totalTodos; i++) {
+        this.todos[i].completed=true;
+      }
+    }
+    this.displayTodos();
   }
+  
 };
