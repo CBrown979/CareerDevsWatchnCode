@@ -9,6 +9,7 @@
 var todoList = {
   todos: [],
   displayTodos: function() {
+    debugger; //once done with debugger, delete this line from code
     if (this.todos.length === 0) {
       console.log("Your todo list is empty!");
     } else {
