@@ -1,8 +1,15 @@
-//Version 6 - Thinking in Code
+//Version 7 - HTML and the DOM
+//building an interactive user interface
+//DOM is how the browser is interpreting the HTML
+//when we inspect, the DOM is #document in the Elements tab
+//the DOM tree shows all the Parent/Child relationships in the head, body, h1, p --> all are considered nodes
+
+
 
 var todoList = {
   todos: [],
   displayTodos: function() {
+    debugger; //once done with debugger, delete this line from code
     if (this.todos.length === 0) {
       console.log("Your todo list is empty!");
     } else {
@@ -65,3 +72,18 @@ var todoList = {
   }
   
 };
+
+// 1) We want to get access to the display todos button via the getElementID
+var displayTodosButton=document.getElementById("displayTodosbutton");
+var toggleAllButton=document.getElementById("toggleAllButton");
+
+
+// 2) We want to run displayTodos method, when someone clicks the display todos button
+displayTodosButton.addEventListener("click", function() {
+  todoList.displayTodos();  
+});
+
+toggleAllButton.addEventListener("click", function() {
+    todoList.toggleAll();
+})
+
