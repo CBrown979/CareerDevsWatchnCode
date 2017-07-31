@@ -1,4 +1,4 @@
-<!--//Version 7 - HTML and the DOM
+<!--//Version 7 and 8- HTML and the DOM
 //building an interactive user interface
 //DOM is how the browser is interpreting the HTML
 //when we inspect, the DOM is #document in the Elements tab
@@ -14,10 +14,38 @@
 <body>
     <h1>Todo List</h1>
     
-    <button>Display Todos</button>
-    <button>Toggle All</button>
+    <!--<button id="displayTodosbutton">Display Todos</button>-->
+    <!--<button id="toggleAllButton">Toggle All</button>-->
     
-    <script src="script-js"></script>
+    <!--<button onclick="">Display Todos</button>-->
+    <!--<button onclick="">Toggle All</button>-->
+    
+    <div>
+      <button onclick="handlers.displayTodos()">Display Todos</button>
+      <button onclick="handlers.toggleAll()">Toggle All</button>
+    </div>
+    <div>
+      <button onclick="handlers.addTodo()">Add</button>
+      <input id="addTodoTextInput" type="text">
+    </div>
+    
+    <div>
+      <button onclick="handlers.changeTodo()">Change Todo</button>
+      <input id="changeTodoPositionInput" type="number">
+      <input id="changeTodoTextInput" type="text">
+    </div>
+    
+    <div>
+      <button onclick="handlers.deleteTodo()">Delete</button>
+      <input id="deleteTodoPositionInput" type="number">
+    </div>
+    
+    <div>
+      <button onclick="handlers.toggleCompleted()">Toggle Completed</button>
+      <input id="toggleCompletedPositionInput" type="number">    
+    </div>
+    
+    <script src="script.js"></script>
     
 </body>
 </html>

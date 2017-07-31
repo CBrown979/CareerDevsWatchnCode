@@ -1,10 +1,5 @@
-//Version 7 - HTML and the DOM
-//building an interactive user interface
-//DOM is how the browser is interpreting the HTML
-//when we inspect, the DOM is #document in the Elements tab
-//the DOM tree shows all the Parent/Child relationships in the head, body, h1, p --> all are considered nodes
-
-
+//Version 8 - Getting Data From Inputs
+//refactoring - restructuring process of existing code (to make more readable, etc) w/o changing external behavior
 
 var todoList = {
   todos: [],
@@ -74,16 +69,48 @@ var todoList = {
 };
 
 // 1) We want to get access to the display todos button via the getElementID
-var displayTodosButton=document.getElementById("displayTodosbutton");
-var toggleAllButton=document.getElementById("toggleAllButton");
-
+// var displayTodosButton=document.getElementById("displayTodosbutton");
+// var toggleAllButton=document.getElementById("toggleAllButton");
+// // New refactored code on index.html -- does the same as above but no longer need IDs - using onclick
 
 // 2) We want to run displayTodos method, when someone clicks the display todos button
-displayTodosButton.addEventListener("click", function() {
-  todoList.displayTodos();  
-});
+// displayTodosButton.addEventListener("click", function() {
+//   todoList.displayTodos();  
+// });
 
-toggleAllButton.addEventListener("click", function() {
+// toggleAllButton.addEventListener("click", function() {
+//     todoList.toggleAll();
+// });
+
+var handlers = {//we want the methods on this object to handle different events or clicks - when clicked, we want a handler to handle that
+  displayTodos: function() {
+    todoList.displayTodos();
+  },
+  toggleAll: function() {
     todoList.toggleAll();
-})
-
+  },
+  addTodo: function() {
+    var addTodoTextInput = document.getElementById("addTodoTextInput");
+    todoList.addTodo(addTodoTextInput.value);
+    addTodoTextInput.value="";
+  },
+  changeTodo: function() {
+    var changeTodoPositionInput = document.getElementById("changeTodoPositionInput");
+    var changeTodoTextInput = document.getElementById("changeTodoTextInput");
+    todoList.changeTodo;
+    changeTodoPositionInput.value="";
+    changeTodoTextInput.value="";
+    
+  }
+  deleteTodo: function() {
+    var deleteTodoPositionInput = document.getElementById("deleteTodoPositionInput");
+    todoList.deleteTodo(deleteTodoPositionIntput.valueAsNumber)
+    deleteTodoPositionInput.value = "";
+  }
+  toggleCompleted: function() {
+    var toggleCompletedPositionInput = document.getElementById("toggleCompleted");
+    todoList.toggleCompleted(toggleCompletedPositionInput.valueAsNumber);
+    toggleCompletedPositionInput.value = "";
+    
+  }
+};
