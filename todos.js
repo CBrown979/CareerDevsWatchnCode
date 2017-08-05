@@ -101,16 +101,18 @@ var handlers = {//we want the methods on this object to handle different events 
     changeTodoPositionInput.value="";
     changeTodoTextInput.value="";
     
-  }
+  },
   deleteTodo: function() {
     var deleteTodoPositionInput = document.getElementById("deleteTodoPositionInput");
-    todoList.deleteTodo(deleteTodoPositionIntput.valueAsNumber)
+    todoList.deleteTodo(deleteTodoPositionInput.valueAsNumber);
     deleteTodoPositionInput.value = "";
-  }
+  },
   toggleCompleted: function() {
     var toggleCompletedPositionInput = document.getElementById("toggleCompleted");
     todoList.toggleCompleted(toggleCompletedPositionInput.valueAsNumber);
     toggleCompletedPositionInput.value = "";
-    
+  },
+  toggleAll: function() {
+    todoList.toggleAll();
   }
 };
