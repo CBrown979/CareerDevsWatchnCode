@@ -1,4 +1,4 @@
-//Version 9 - Escape from the Console
+//Version 10 - ClickToDelete
 
 var todoList = {
   todos: [],
@@ -61,10 +61,8 @@ var handlers = {//we want the methods on this object to handle different events 
     changeTodoTextInput.value="";
     view.displayTodos();
   },
-  deleteTodo: function() {
-    var deleteTodoPositionInput = document.getElementById("deleteTodoPositionInput");
-    todoList.deleteTodo(deleteTodoPositionInput.valueAsNumber);
-    deleteTodoPositionInput.value = "";
+  deleteTodo: function(position) {
+    todoList.deleteTodo(position);
     view.displayTodos();
   },
   toggleCompleted: function() {
@@ -94,8 +92,10 @@ var view = {
         todoTextWithCompletion = '( )' + todo.todoText;
       }
       
+      todoLi.id = i;
       todoLi.textContent = todoTextWithCompletion; // this line will now replace todoLi.textContent=todoList.todos[i].todoText;
             //todoLi.textContent = todoList.todos[i].todoText; //the textContent property on these elements can be changed by setting its value to the todoText property of each todoObject inside todosArray
+      todosUl.appendChild(this.createDeleteButton());
       todosUl.appendChild(todoLi);
     }
       
@@ -108,5 +108,29 @@ var view = {
           // else
             // ( ) todoText
           // todoLi.textContent = todoTextWithCompletion;
-  }
-};
+    },
+    createDeleteButton: function() {
+      var deleteButton = document.createElement('button');
+      deleteButton.textContent = "Delete";
+      deleteButton.className = 'deleteButton';
+      return deleteButton;
+    },
+    setUpEventListeners: function() {
+      var todosUl = document.querySelector('ul');
+      todosUl.addEventListener('click', function(event) {
+      //console.log(event.target.parentNode.id); this console.log was only for demo purposes
+      
+      //Get the element that was clicked on
+      var elementClicked = event.target;
+      
+      //Check if eventClicked is a delete button
+      if (elementClicked.classname === 'deleteButton') {
+        //Run handlers.deleteTodo(position)
+        handlers.deleteTodo(parseInt(elementClicked.parentNode.id));
+        }
+      });  
+    }
+  };
+  
+  view.setUpEventListeners(); 
+    

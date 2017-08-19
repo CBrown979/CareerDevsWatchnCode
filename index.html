@@ -26,11 +26,6 @@
     </div>
     
     <div>
-      <button onclick="handlers.deleteTodo()">Delete</button>
-      <input id="deleteTodoPositionInput" type="number">
-    </div>
-    
-    <div>
       <button onclick="handlers.toggleCompleted()">Toggle Completed</button>
       <input id="toggleCompletedPositionInput" type="number">    
     </div>
@@ -40,6 +35,10 @@
        var todosUl = document.querySelector('ul'); -- todosUl will not equal <ul></ul>
        todosUl.appendChild(todoLi); will now add 'li' element into the unordered list as a child of Ul
   --> 
+  
+    <ul>
+    </ul>
+    
     <script src="todos.js"></script>
     
   </body>
