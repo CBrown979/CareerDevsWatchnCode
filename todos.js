@@ -1,4 +1,4 @@
-//Version 10 - ClickToDelete
+//Version 11 - DestroyAllForLoops
 
 var todoList = {
   todos: [],
@@ -24,25 +24,47 @@ var todoList = {
     var completedTodos=0;
     
     //Get number of completed todos.
-    for(var i=0; i<totalTodos; i++) { // using forLoop to count the number of completed todos
-      if (this.todos[i].completed === true) { //the if looks at each item in our array
-        completedTodos++; 
+    // for(var i=0; i<totalTodos; i++) { // using forLoop to count the number of completed todos
+    //   if (this.todos[i].completed === true) { //the if looks at each item in our array
+    //     completedTodos++; 
+    //   }
+    // }
+    this.todos.forEach(function(todo) {
+      if (todo.completed === true) {
+        completedTodos++;
       }
-    }
-    
+    });
     
     // Case 1: If everything is true, make everything false.
     if (completedTodos === totalTodos) { // we are checking to make sure that everything is true
       // Make everything false.
-      for(var i = 0; i < totalTodos; i++) { // we're going thru all the items and changing all completed items to false
-        this.todos[i].completed = false;
-      }
+      // for(var i = 0; i < totalTodos; i++) { // we're going thru all the items and changing all completed items to false
+      //   this.todos[i].completed = false;
+      // }
+      this.todos.forEach(function(todo) {
+        todo.completed = false;
+      });
+      
+      
     // Case 2: Otherwise, make everything true.  
     } else {
-      for( var i=0; i<totalTodos; i++) {
-        this.todos[i].completed = true;
-      }
+      // for( var i=0; i<totalTodos; i++) {
+      //   this.todos[i].completed = true;
+      // }
+      this.todos.forEach(function(todo) {
+        todo.completed = true;
+      });
     }
+    this.todos.forEach(function(todo) {
+      // Case 1: If everything is true, make everything false.
+      if (completedTodos === totalTodos) {
+        todo.completed = false;
+        //Case 2: Otherwise, make everything true
+      } else {
+        todo.completed = true;
+      }
+    });
+    
   }
   
 };
@@ -81,33 +103,25 @@ var view = {
   displayTodos: function () {
     var todosUl = document.querySelector('ul');
     todosUl.innerHTML = '';
-    for (var i = 0; i < todoList.todos.length; i++) {
+    todoList.todos.forEach(function(todo, position) {  
       var todoLi = document.createElement('li');
-      var todo = todoList.todos[i]; //the [i] is needed to grab each particular todoFrom the list
-      
       var todoTextWithCompletion = '';
+      
       if (todo.completed === true) {
         todoTextWithCompletion = '(x)' + todo.todoText;
       } else {
         todoTextWithCompletion = '( )' + todo.todoText;
       }
       
-      todoLi.id = i;
-      todoLi.textContent = todoTextWithCompletion; // this line will now replace todoLi.textContent=todoList.todos[i].todoText;
-            //todoLi.textContent = todoList.todos[i].todoText; //the textContent property on these elements can be changed by setting its value to the todoText property of each todoObject inside todosArray
+      todoLi.id = position;
+      todoLi.textContent = todoTextWithCompletion; 
       todosUl.appendChild(this.createDeleteButton());
       todosUl.appendChild(todoLi);
-    }
       
-      // Comments for above
-      //'(x) todoText' - structure of the string we want on the screen - with an '(x)' if completed followed by the todoText
-      // to do this, we need to create a new variable to store this, and will change whether the completed property is true or false
-      // var todoTextWithCompletion = ''; - initial set to nothing - will change same with an if statement, as follows:
-          // if (todoDotcompleted === true)
-            // (x) todoText
-          // else
-            // ( ) todoText
-          // todoLi.textContent = todoTextWithCompletion;
+      //this // refers to the view object
+      //forEach(callback, this)
+    }, this);
+ 
     },
     createDeleteButton: function() {
       var deleteButton = document.createElement('button');
@@ -127,7 +141,7 @@ var view = {
       if (elementClicked.classname === 'deleteButton') {
         //Run handlers.deleteTodo(position)
         handlers.deleteTodo(parseInt(elementClicked.parentNode.id));
-        }
+      }
       });  
     }
   };
