@@ -1,29 +1,19 @@
-<!--//Version 7 and 8- HTML and the DOM
-//building an interactive user interface
-//DOM is how the browser is interpreting the HTML
-//when we inspect, the DOM is #document in the Elements tab
-//the DOM tree shows all the Parent/Child relationships in the head, body, h1, p - all are considered nodes -->
+<!--//Version 9 - Escape from the Console -->
+
 
 <!doctype html>
 <html lang="en">
 <head>
     <link rel="stylesheet" href="style.css">
-    
-    <title>Document</title>
 </head>
-<body>
+
+  <body>
     <h1>Todo List</h1>
     
-    <!--<button id="displayTodosbutton">Display Todos</button>-->
-    <!--<button id="toggleAllButton">Toggle All</button>-->
-    
-    <!--<button onclick="">Display Todos</button>-->
-    <!--<button onclick="">Toggle All</button>-->
-    
     <div>
-      <button onclick="handlers.displayTodos()">Display Todos</button>
       <button onclick="handlers.toggleAll()">Toggle All</button>
     </div>
+    
     <div>
       <button onclick="handlers.addTodo()">Add</button>
       <input id="addTodoTextInput" type="text">
@@ -44,9 +34,14 @@
       <button onclick="handlers.toggleCompleted()">Toggle Completed</button>
       <input id="toggleCompletedPositionInput" type="number">    
     </div>
+  
+  <!-- Work completed inside the DOM and not the HTML file:
+       var todoLi = document.createElement('li');  -- todoLi will now equal <li></li> 
+       var todosUl = document.querySelector('ul'); -- todosUl will not equal <ul></ul>
+       todosUl.appendChild(todoLi); will now add 'li' element into the unordered list as a child of Ul
+  --> 
+    <script src="todos.js"></script>
     
-    <script src="script.js"></script>
-    
-</body>
+  </body>
 </html>
 
